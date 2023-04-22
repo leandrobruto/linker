@@ -25,6 +25,11 @@ class CreateTableConnect extends Migration
                 'constraint' => 5,
                 'unsigned' => true,
             ],
+            'status' => [
+                'type' => 'BOOLEAN',
+                'null' => false,
+                'default' => null,
+            ],
             'created_at' => [
                 'type' => 'DATETIME',
                 'null' => true,
