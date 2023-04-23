@@ -136,20 +136,27 @@
               </div>
             </div>
             <div class="mt-2">
-              <button type="submit" class="btn btn-primary me-2">Salvar alterações</button>
-              <button type="reset" class="btn btn-outline-secondary me-2">Cancelar</button>
-              <button type="button" class="btn btn-outline-secondary" onclick="history.back();">Voltar</button>
+              <button type="submit" class="btn btn-primary me-2">
+                <span class="tf-icons bx bx-save"></span> Salvar alterações
+              </button>
+              <button type="reset" class="btn btn-danger me-2">
+                <span class="tf-icons bx bx-x"></span> Cancelar
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="history.back();">
+                <span class="tf-icons bx bx-arrow-back"></span> Voltar
+              </button>
             </div>
           <?php echo form_close(); ?>
         </div>
         <!-- /Account -->
       </div>
+
       <div class="card">
         <h5 class="card-header">Excluír conta</h5>
         <div class="card-body">
           <div class="mb-3 col-12 mb-0">
             <div class="alert alert-warning">
-              <h6 class="alert-heading fw-bold mb-1">Tem certeza de que deseja excluir sua conta?/h6>
+              <h6 class="alert-heading fw-bold mb-1">Tem certeza de que deseja excluir sua conta?</h6>
               <p class="mb-0">Depois de excluir sua conta, não há como voltar atrás. Por favor, tenha certeza.</p>
             </div>
           </div>
@@ -165,10 +172,13 @@
                 >Eu confirmo a desativação da minha conta</label
               >
             </div>
-            <button type="submit" class="btn btn-danger deactivate-account">Desativar conta</button>
+            <button type="submit" class="btn btn-danger deactivate-account">
+              <span class="tf-icons bx bx-x"></span> Desativar conta
+            </button>
           </form>
         </div>
       </div>
+      
     </div>
   </div>
 

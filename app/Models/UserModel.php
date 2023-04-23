@@ -64,6 +64,26 @@ class UserModel extends Model
         return $data;
     }
 
+     /**
+     * @uso Controller users no método search com o autocomplete
+     * @param string $term
+     * @return array users
+     */
+    public function search($term) {
+
+        if ($term === null) {
+
+            return [];
+        }
+
+
+        return $this->select('id, name')
+                        ->like('name', $term)
+                        ->withDeleted(true)
+                        ->get()
+                        ->getResult();
+    }
+
     public function desabilitaValidacaoSenha () {
         unset($this->validationRules['password']);
         unset($this->validationRules['password_confirmation']);

@@ -175,6 +175,13 @@
                   <div data-i18n="Games">Jogos</div>
                 </a>
               </li>
+              <!-- Games -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-user"></i>
+                  <div data-i18n="Games">Usuários</div>
+                </a>
+              </li>
               <!-- Profile -->
               <li class="menu-item">
                 <a href="<?php echo site_url('accounts/') . userLoggedIn()->username; ?>" class="menu-link">
@@ -222,9 +229,11 @@
                   <i class="bx bx-search fs-4 lh-0"></i>
                   <input
                     type="text"
+                    id="query"
                     class="form-control border-0 shadow-none"
-                    placeholder="Search..."
-                    aria-label="Search..."
+                    name="query"
+                    placeholder="Pesquisar..."
+                    aria-label="Pesquisar..."
                   />
                 </div>
               </div>

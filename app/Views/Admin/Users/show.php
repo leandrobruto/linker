@@ -75,7 +75,7 @@
         </div>
         <hr class="my-0" />
         <div class="card-body">
-          <?php echo form_open("admin/users/update/$user->id"); ?>
+        <?php echo form_open("accounts/update/$user->id"); ?>
             <div class="row">
               <div class="mb-3 col-md-6">
                 <label for="name" class="form-label">Name</label>
@@ -84,7 +84,7 @@
                   type="text"
                   id="name"
                   name="name"
-                  value="<?php echo $user->name; ?>"
+                  value="<?php echo ucfirst($user->name); ?>"
                   autofocus
                 />
               </div>
@@ -112,45 +112,52 @@
                 />
               </div>
               <div class="mb-3 col-md-6">
-                <label for="active" class="form-label">Situação</label>
+                <label for="active" class="form-label">Ativo</label>
                 <input
                   type="text"
                   class="form-control"
                   id="active"
                   name="active"
-                  value="<?php echo $user->active; ?>"
+                  value="<?php echo ($user->active ? 'Sim' : 'Não'); ?>"
                 />
               </div>
               <div class="mb-3 col-md-6">
                 <label class="form-label" for="phoneNumber">Telefone</label>
                 <div class="input-group input-group-merge">
-                  <span class="input-group-text">(+55)</span>
+                  <span class="input-group-text"></span>
                   <input
                     type="text"
                     id="phoneNumber"
                     name="phoneNumber"
-                    class="form-control"
-                    placeholder="(88)99999-9999"
+                    class="form-control sp_celphones"
+                    placeholder="(00) 00000-0000"
                   />
                 </div>
               </div>
             </div>
             <div class="mt-2">
-              <button type="submit" class="btn btn-primary me-2">Salvar alterações</button>
-              <button type="reset" class="btn btn-outline-secondary me-2">Cancelar</button>
-              <button type="button" class="btn btn-outline-secondary" onclick="history.back();">Voltar</button>
+              <button type="submit" class="btn btn-primary me-2">
+                <span class="tf-icons bx bx-save"></span> Salvar alterações
+              </button>
+              <button type="reset" class="btn btn-danger me-2">
+                <span class="tf-icons bx bx-x"></span> Cancelar
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="history.back();">
+                <span class="tf-icons bx bx-arrow-back"></span> Voltar
+              </button>
             </div>
           <?php echo form_close(); ?>
         </div>
         <!-- /Account -->
       </div>
+
       <div class="card">
         <h5 class="card-header">Excluír conta</h5>
         <div class="card-body">
           <div class="mb-3 col-12 mb-0">
             <div class="alert alert-warning">
-              <h6 class="alert-heading fw-bold mb-1">Are you sure you want to delete your account?</h6>
-              <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
+              <h6 class="alert-heading fw-bold mb-1">Tem certeza de que deseja excluir sua conta?</h6>
+              <p class="mb-0">Depois de excluir sua conta, não há como voltar atrás. Por favor, tenha certeza.</p>
             </div>
           </div>
           <form id="formAccountDeactivation" onsubmit="return false">
@@ -162,98 +169,18 @@
                 id="accountActivation"
               />
               <label class="form-check-label" for="accountActivation"
-                >I confirm my account deactivation</label
+                >Eu confirmo a desativação da minha conta</label
               >
             </div>
-            <button type="submit" class="btn btn-danger deactivate-account">Deactivate Account</button>
+            <button type="submit" class="btn btn-danger deactivate-account">
+              <span class="tf-icons bx bx-x"></span> Desativar conta
+            </button>
           </form>
         </div>
       </div>
+
     </div>
   </div>
-<div class="row">
-  <div class="col-lg-6 grid-margin stretch-card">
-    <div class="card">
-      <div class="card-header bg-primary pb-0 pt-4">
-        <h4 class="card-title text-white"><?php echo esc($title); ?></h4>
-      </div>
-      <div class="card-body">
-
-        <p class="card-text">
-          <span class="font-weight-bold">Nome:</span>
-          <?php echo esc($user->email); ?>
-        </p>
-        <p class="card-text">
-          <span class="font-weight-bold">Email:</span>
-          <?php echo esc($user->email); ?>
-        </p>
-        <p class="card-text">
-          <span class="font-weight-bold">Ativo:</span>
-          <?php echo ($user->active ? 'Sim' : 'Não'); ?>
-        </p>
-        <p class="card-text">
-          <span class="font-weight-bold">Perfil:</span>
-          <?php echo esc($user->is_admin ? 'Administrador' : 'Cliente'); ?>
-        </p>
-        <p class="card-text">
-          <span class="font-weight-bold">Criado:</span>
-          <?php echo $user->created_at->humanize(); ?>
-        </p>
-
-        <?php if ($user->deleted_at == null): ?>
-       
-          <p class="card-text">
-            <span class="font-weight-bold">Atualizado:</span>
-            <?php echo $user->updated_at->humanize(); ?>
-          </p>
-
-        <?php else: ?>
-
-          <p class="card-text">
-            <span class="font-weight-bold text-danger">Excluído:</span>
-            <?php echo $user->deleted_at->humanize(); ?>
-          </p>
-
-        <?php endif; ?>
-
-        <div class="mt-4">
-
-          <?php if ($user->deleted_at == null): ?>
-        
-            <a href="<?php echo site_url("admin/users/edit/$user->id"); ?>" class="btn btn-dark btn-sm mr-2">
-              <i class="mdi mdi-pencil btn-icon-prepend"></i>
-              Editar
-            </a>
-
-            <a href="<?php echo site_url("admin/users/excluir/$user->id"); ?>" class="btn btn-danger btn-sm mr-2">
-              <i class="mdi mdi-trash-can btn-icon-prepend"></i>
-              Excluir
-            </a>
-        
-            <a href="<?php echo site_url("admin/users"); ?>" class="btn btn-light btn-sm">
-              <i class="mdi mdi-arrow-left btn-icon-prepend"></i>  
-              Voltar
-            </a>
-
-          <?php else: ?>
-
-            <a title="Desfazer exclusão" href="<?php echo site_url("admin/users/desfazerExclusao/$user->id"); ?>" class="btn btn-dark btn-sm mr-2">
-              <i class="mdi mdi-undo btn-icon-prepend"></i>
-              Desfazer
-            </a>
-
-            <a href="<?php echo site_url("admin/users"); ?>" class="btn btn-light btn-sm">
-              <i class="mdi mdi-arrow-left btn-icon-prepend"></i>  
-              Voltar
-            </a>
-
-          <?php endif; ?>
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <?php echo $this->endSection(); ?>
 
@@ -261,6 +188,7 @@
 <!-- Aqui enviamos para o template principal os scripts -->
 <?php echo $this->section('scripts'); ?>
 
-
+  <script src="<?php echo site_url('admin/assets/vendor/mask/jquery.mask.min.js'); ?>"></script>
+  <script src="<?php echo site_url('admin/assets/vendor/mask/app.js'); ?>"></script>
 
 <?php echo $this->endSection(); ?>

@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\BaseController;
+use App\Entities\User;
 
 class Users extends BaseController
 {
@@ -30,8 +31,8 @@ class Users extends BaseController
         {
             exit('Página não encontrada');
         }
-
-        $users = $this->userModel->procurar($this->request->getGet('term'));
+        
+        $users = $this->userModel->search($this->request->getGet('term'));
 
         $retorno = [];
 
@@ -48,22 +49,22 @@ class Users extends BaseController
     public function create()
     {
 
-        $user = new user();
+        $user = new User();
 
         $data = [
-            'title'     => "Criando novo usuário",
+            'title'     => "Novo usuário",
             'user' => $user,
         ];
 
-        return view('Admin/Users/criar', $data);
+        return view('Admin/Users/create', $data);
     }
 
     public function register()
     {
         if ($this->request->getMethod() === 'post') {
             
-            $user = new user($this->request->getPost());
-        
+            $user = new User($this->request->getPost());
+
             if ($this->userModel->protect(false)->save($user)) {
                 return redirect()->to(site_url("admin/users/show/" . $this->userModel->getInsertID()))
                                 ->with('success', "Usuário $user->name cadastrado com sucesso!");
