@@ -24,7 +24,7 @@ class Users extends BaseController
         return view('Admin/Users/index', $data);
     }
 
-    public function procurar()
+    public function search()
     {
         if (!$this->request->isAjax()) 
         {
@@ -45,7 +45,7 @@ class Users extends BaseController
         return $this->response->setJson($retorno);
     }
 
-    public function criar()
+    public function create()
     {
 
         $user = new user();
@@ -58,7 +58,7 @@ class Users extends BaseController
         return view('Admin/Users/criar', $data);
     }
 
-    public function cadastrar()
+    public function register()
     {
         if ($this->request->getMethod() === 'post') {
             
@@ -148,7 +148,7 @@ class Users extends BaseController
         }
     }
 
-    public function excluir($id = null)
+    public function delete($id = null)
     {
         $user = $this->findUserOr404($id);
 
@@ -174,7 +174,7 @@ class Users extends BaseController
         return view('Admin/Users/excluir', $data);
     }
 
-    public function desfazerExclusao($id = null)
+    public function undelete($id = null)
     {
         $user = $this->findUserOr404($id);
         

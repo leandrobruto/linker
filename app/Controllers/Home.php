@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 
 class Home extends BaseController
 {
+
     public function index($username = null)
     {        
         $auth = service('auth');
@@ -25,15 +26,5 @@ class Home extends BaseController
             return view('Login/index', $data);
         }
     }
-
-    public function profile($username = null)
-    {
-
-        $data = [
-            'title' => 'Meu Perfil!'
-        ];
-        
-        return view('Account/profile', $data);
-
-    }
+    
 }

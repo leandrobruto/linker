@@ -21,16 +21,46 @@ class Accounts extends BaseController
     {
 
         $user = $this->findUserByUsernameOr404($username);
+        $connection = $this->user ? $this->connectionModel
+            ->where('requester_user_id', $this->user->id)
+            ->where('requested_user_id', $user->id)
+            ->first() : null;
 
         $data = [
             'title' => 'Meu Perfil!',
             'user' => $user,
+            'connection' => $connection,
+            'count' => $this->connectionModel->countConnections($user->id),
         ];
         
         return view('Accounts/profile', $data);
 
     }
 
+    public function procurar() {
+
+        if (!$this->request->isAJAX()) {
+
+            exit('Página não encontrada');
+        }
+
+
+        $users = $this->userModel->procurar($this->request->getGet('term'));
+
+        $retorno = [];
+
+
+        foreach ($usuarios as $usuario) {
+
+            $data['id'] = $usuario->id;
+            $data['value'] = $usuario->nome;
+
+            $retorno[] = $data;
+        }
+
+        return $this->response->setJSON($retorno);
+    }
+    
     public function edit($username = null)
     {
         $user = $this->findUserByUsernameOr404($username);
@@ -115,6 +145,18 @@ class Accounts extends BaseController
         } else {
             /* Não é POST */
             return redirect()->back();
+        }
+    }
+
+    public function disconnect($id = null)
+    {
+        $connection = $this->connectionModel->where('id', $id)->first();
+        $requested_user = $this->findUserOr404($connection->requested_user_id);
+
+        if ($this->request->getMethod() === 'post') {
+
+            $this->connectionModel->delete($id);
+            return redirect()->to(site_url("accounts/$requested_user->username"))->with('success', "Conexão com o usuário " . ucwords($requested_user->name) . " desfeita com sucesso!");
         }
     }
 

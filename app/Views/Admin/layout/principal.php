@@ -65,7 +65,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="<?php echo site_url('/'); ?>" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -132,58 +132,71 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            <!-- Dashboard -->
-            <li class="menu-item active">
-              <a href="<?php echo site_url('admin/home'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-bar-chart"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-              </a>
-            </li>
             <!-- Home -->
             <li class="menu-item">
               <a href="<?php echo site_url('/'); ?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Home</div>
+                <div data-i18n="Home">Home</div>
               </a>
             </li>
-            <!-- Mensagens -->
-            <li class="menu-item">
-              <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div data-i18n="Analytics">Mensagens</div>
-              </a>
-            </li>
-            <!-- Conexões -->
-            <li class="menu-item">
-              <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-link"></i>
-                <div data-i18n="Analytics">Conexões</div>
-              </a>
-            </li>
-            <!-- Gamificação -->
-            <li class="menu-item">
-              <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bxs-chess"></i>
-                <div data-i18n="Analytics">Jogos</div>
-              </a>
-            </li>
-            <!-- Perfil -->
             <?php if (userLoggedIn()): ?>
+              <!-- Dashboard -->
+              <li class="menu-item active">
+                <a href="<?php echo site_url('admin/home'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-bar-chart"></i>
+                  <div data-i18n="Dashboard">Dashboard</div>
+                </a>
+              </li>
+              <!-- Messages -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-chat"></i>
+                  <div data-i18n="Messages">Mensagens</div>
+                </a>
+              </li>
+              <!-- Notifications -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-bell"></i>
+                  <div data-i18n="Notificatons">Notificações</div>
+                </a>
+              </li>
+              <!-- Connections -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('connections'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-link"></i>
+                  <div data-i18n="Connections">Conexões <span class="badge rounded-pill bg-primary"><?php echo connCount(userLoggedIn()->id) ?></span></div>
+                </a>
+              </li>
+              <!-- Games -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('admin/users'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bxs-chess"></i>
+                  <div data-i18n="Games">Jogos</div>
+                </a>
+              </li>
+              <!-- Profile -->
               <li class="menu-item">
                 <a href="<?php echo site_url('accounts/') . userLoggedIn()->username; ?>" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-user"></i>
-                  <div data-i18n="Analytics">Meu Perfil</div>
+                  <div data-i18n="My Profile">Meu Perfil</div>
+                </a>
+              </li>
+              <!-- Logout -->
+              <li class="menu-item">
+                <a href="<?php echo site_url('login/logout'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-power-off"></i>
+                  <div data-i18n="Logout">Sair</div>
+                </a>
+              </li>
+            <?php else: ?>
+              <li class="menu-item">
+                <a href="<?php echo site_url('login'); ?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-door-open"></i>
+                  <div data-i18n="Logout">Entrar</div>
                 </a>
               </li>
             <?php endif; ?>
-            <!-- Sair -->
-            <li class="menu-item">
-              <a href="<?php echo site_url('login/logout'); ?>" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-power-off"></i>
-                <div data-i18n="Analytics">Sair</div>
-              </a>
-            </li>
-
           </ul>
         </aside>
         <!-- / Menu -->
